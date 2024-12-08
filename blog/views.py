@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def post_list(request): 
+    # only for all blog post
     country = get_user_country(request=request)
     posts = BlogPost.objects.all()
     filtered_posts = posts.filter(country=country)
@@ -23,7 +24,7 @@ def post_list(request):
         page_obj_post = paginator_post.get_page(2)
 
 
-    #for filter
+    #for filtered blog post by given country
 
     paginator = Paginator(filtered_posts.order_by('created_at'), 8)  
     page_of_number = request.GET.get('page',1) 
